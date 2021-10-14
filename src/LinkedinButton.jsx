@@ -1,11 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-const { REACT_APP_CALLBACK_URL, REACT_APP_STATE, REACT_APP_CLIENT_ID, CLIENT_SECRET, REACT_APP_REDIRECT_URI } =  process.env;
+const {
+  REACT_APP_LINKEDIN_AUTHORIZATION_URL,
+  REACT_APP_CALLBACK_URL,
+  REACT_APP_STATE,
+  REACT_APP_CLIENT_ID,
+  CLIENT_SECRET,
+  REACT_APP_REDIRECT_URI
+} =  process.env;
 
 console.log(REACT_APP_CALLBACK_URL)
 function LinkedinButton(){
   function openPage() {
-    axios.get(REACT_APP_CALLBACK_URL, {
+    axios.get(REACT_APP_LINKEDIN_AUTHORIZATION_URL, {
       params: {
         response_type: 'code',
         client_id: REACT_APP_CLIENT_ID,

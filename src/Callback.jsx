@@ -2,7 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { extractParams } from "./utils";
-const { REACT_APP_LINKEDIN_ACCESSTOKEN_URL, REACT_APP_STATE, REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET, REACT_APP_REDIRECT_URI } =  process.env;
+const {
+  REACT_APP_LINKEDIN_ACCESSTOKEN_URL,
+  REACT_APP_STATE,
+  REACT_APP_CLIENT_ID,
+  REACT_APP_CLIENT_SECRET,
+  REACT_APP_REDIRECT_URI
+} =  process.env;
 
 function Callback({ location }) {
   const [auth, setAuth] = useState(false)

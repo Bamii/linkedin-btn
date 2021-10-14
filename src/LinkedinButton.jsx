@@ -9,7 +9,7 @@ const {
   REACT_APP_REDIRECT_URI
 } =  process.env;
 
-console.log(REACT_APP_CALLBACK_URL)
+console.log(REACT_APP_LINKEDIN_AUTHORIZATION_URL)
 function LinkedinButton(){
   function openPage() {
     axios.get(REACT_APP_LINKEDIN_AUTHORIZATION_URL, {

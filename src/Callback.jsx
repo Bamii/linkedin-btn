@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { extractParams } from "./utils";
-const { CALLBACK_URL, LINKEDIN_AUTHORIZATION_URL, LINKEDIN_ACCESSTOKEN_URL, STATE, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } =  process.env;
+const { REACT_APP_LINKEDIN_ACCESSTOKEN_URL, REACT_APP_STATE, REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET, REACT_APP_REDIRECT_URI } =  process.env;
 
 function Callback({ location }) {
   const [auth, setAuth] = useState(false)
@@ -15,19 +15,19 @@ function Callback({ location }) {
     // -- content-type: x-www-form-urlencoded
     const { code, state } = extractParams(location.search)
 
-    if(state != STATE) {
+    if(state != REACT_APP_STATE) {
       // there is something very wrong here. stop the auth process
       return;
     }
     
-    axios.post(LINKEDIN_ACCESSTOKEN_URL, {
+    axios.post(REACT_APP_LINKEDIN_ACCESSTOKEN_URL, {
       headers: { 'Content-Type:': 'x-www-form-urlencoded' },
       params: {
         grant_type: 'authorization_code',
         code,
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        redirect_uri: REDIRECT_URI,
+        client_id: REACT_APP_CLIENT_ID,
+        client_secret: REACT_APP_CLIENT_SECRET,
+        redirect_uri: REACT_APP_REDIRECT_URI,
       }
     })
     .then(res => {

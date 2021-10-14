@@ -6,17 +6,20 @@ import {
 import Callback from "./Callback";
 import Dashboard from "./Dashboard";
 import Home from "./Home";
+require('dotenv').config();
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/callback">
-          <Callback />
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
+        <Route
+          path="/callback"
+          render={({ location }) => <Callback location={location} />}
+        />
+        <Route
+          path="/dashboard"
+          render={({ location }) =><Dashboard location={location} />}
+        />
         <Route path="/">
           <Home />
         </Route>

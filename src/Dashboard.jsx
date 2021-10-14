@@ -1,8 +1,6 @@
-import logo from './logo.svg';
-import LinkedinButton  from "./LinkedinButton";
-import './App.css';
+import React, { useEffect } from "react";
 
-function App() {
+function Dashboard() {
   return (
     <div className="App">
       <header className="App-header">        
@@ -12,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default Dashboard;

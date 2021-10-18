@@ -1,16 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import Icon from './link.svg'
+import './linkedin.css'
 const {
-  REACT_APP_LINKEDIN_AUTHORIZATION_URL,
-  REACT_APP_CALLBACK_URL,
   REACT_APP_STATE,
   REACT_APP_CLIENT_ID,
-  CLIENT_SECRET,
-  REACT_APP_REDIRECT_URI
+  REACT_APP_REDIRECT_URI,
+  REACT_APP_LINKEDIN_AUTHORIZATION_URL,
 } =  process.env;
 
-console.log(REACT_APP_LINKEDIN_AUTHORIZATION_URL)
-function LinkedinButton(){
+// mode: full | short
+function LinkedinButton({ mode = "full" }){
   function openPage() {
     axios.get(REACT_APP_LINKEDIN_AUTHORIZATION_URL, {
       params: {
@@ -21,15 +21,16 @@ function LinkedinButton(){
         scope: 'r_liteprofile'
       }
     })
-    .then(res => {
-      // automatically redirects to REDIRECT_URI.
-      console.log(res);
-    })
   }
 
   return (
-    <button onClick={openPage}>
-      this button
+    <button id="signin-linkedin-button" onClick={openPage}>
+      <div className="button-logo">
+        <img className="" src={Icon} alt="LinkedIn Icon."/>
+      </div>
+      <div className="button-text">
+        Sign In {mode == 'full' ? `With LinkedIn` : ''}
+      </div>
     </button>
   )
 }

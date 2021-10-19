@@ -12,14 +12,17 @@ const {
 // mode: full | short
 function LinkedinButton({ mode = "full" }){
   function openPage() {
-    axios.get(REACT_APP_LINKEDIN_AUTHORIZATION_URL, {
+    axios.get('http://localhost:3005/proxy', {
       params: {
-        response_type: 'code',
-        client_id: REACT_APP_CLIENT_ID,
-        redirect_uri: REACT_APP_REDIRECT_URI,
-        state: REACT_APP_STATE,
-        scope: 'r_liteprofile'
+        url: `${REACT_APP_LINKEDIN_AUTHORIZATION_URL}?response_type=code&client_id=${REACT_APP_CLIENT_ID}&redirect_uri=http://localhost:3000/callback&state=${REACT_APP_STATE}&scope=r_liteprofile`
       }
+    })
+    .then(res => {
+      console.log(res.data)
+      window.open(res.data.url)
+    })
+    .catch(res => {
+      console.log(res)
     })
   }
 

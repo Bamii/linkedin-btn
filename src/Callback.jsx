@@ -20,28 +20,29 @@ function Callback({ location }) {
     // -- post req.
     // -- content-type: x-www-form-urlencoded
     const { code, state } = extractParams(location.search)
+    console.log(code, state);
 
     if(state != REACT_APP_STATE) {
       // there is something very wrong here. stop the auth process
       return;
     }
     
-    axios.post(REACT_APP_LINKEDIN_ACCESSTOKEN_URL, {
-      headers: { 'Content-Type:': 'x-www-form-urlencoded' },
-      params: {
-        grant_type: 'authorization_code',
-        code,
-        client_id: REACT_APP_CLIENT_ID,
-        client_secret: REACT_APP_CLIENT_SECRET,
-        redirect_uri: REACT_APP_REDIRECT_URI,
-      }
-    })
-    .then(res => {
-      // code & expires_in.
-      // store the code somewhere... most prefarably the localstorage. then redirect to home?
-      console.log(res)
-      setAuth(true);
-    })
+    // axios.post(REACT_APP_LINKEDIN_ACCESSTOKEN_URL, {
+    //   headers: { 'Content-Type:': 'x-www-form-urlencoded' },
+    //   params: {
+    //     grant_type: 'authorization_code',
+    //     code,
+    //     client_id: REACT_APP_CLIENT_ID,
+    //     client_secret: REACT_APP_CLIENT_SECRET,
+    //     redirect_uri: REACT_APP_REDIRECT_URI,
+    //   }
+    // })
+    // .then(res => {
+    //   // code & expires_in.
+    //   // store the code somewhere... most prefarably the localstorage. then redirect to home?
+    //   console.log(res)
+    //   setAuth(true);
+    // })
   })
 
   if(auth) return <Redirect to="/dashboard" />

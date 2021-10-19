@@ -35,6 +35,8 @@ function Callback({ location }) {
     .then(res => {
       if(res.status === 200) {
         setAuth(true);
+      } else {
+        setAuth(null);
       }
     })
     .catch(result => {

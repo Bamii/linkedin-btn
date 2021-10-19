@@ -21,10 +21,10 @@ function Callback({ location }) {
     // -- content-type: x-www-form-urlencoded
     const { code, state } = extractParams(location.search)
 
-    // if(state != REACT_APP_STATE) {
-    //   // there is something very wrong here. stop the auth process
-    //   return;
-    // }
+    if(state != REACT_APP_STATE) {
+      // there is something very wrong here. stop the auth process
+      return;
+    }
     
     axios.get('https://ayo-api.herokuapp.com/linkedin-access-token', {
       params: {
@@ -33,13 +33,12 @@ function Callback({ location }) {
       }
     })
     .then(res => {
-      console.log("ish", res);
       if(res.status === 200) {
         setAuth(true);
       }
     })
     .catch(result => {
-      console.log(result)
+      setAuth(null);
     })
   })
 
@@ -47,9 +46,13 @@ function Callback({ location }) {
 
   return (
     <div className="App">
-      <header className="App-header">
-        callback
-      </header>
+      {auth === null
+        ? <header className="App-header">
+            could not authenticate...
+          </header>
+        : <header className="App-header">
+            authenticating...
+          </header>}
     </div>
   );
 }

@@ -11,7 +11,10 @@ const {
 
 // mode: full | short
 function LinkedinButton({ mode = "full" }){
+  const [disabled, setDisabled] = useState(false);
+
   function openPage() {
+    setDisabled(true)
     axios.get('https://ayo-api.herokuapp.com/proxy', {
       params: {
         url: `${REACT_APP_LINKEDIN_AUTHORIZATION_URL}?response_type=code&client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URI}&state=${REACT_APP_STATE}&scope=r_liteprofile`
@@ -24,10 +27,16 @@ function LinkedinButton({ mode = "full" }){
     .catch(res => {
       console.log(res)
     })
+    .finally(() => setDisabled(true))
   }
 
   return (
-    <button id="signin-linkedin-button" onClick={openPage}>
+    <button
+      id="signin-linkedin-button"
+      onClick={openPage}
+      disabled={disabled}
+      style={{ cursor: disabled ? 'wait' : 'default' }}
+    >
       <div className="button-logo">
         <img className="" src={Icon} alt="LinkedIn Icon."/>
       </div>

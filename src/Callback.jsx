@@ -20,6 +20,7 @@ function Callback({ location }) {
     // -- post req.
     // -- content-type: x-www-form-urlencoded
     const { code, state } = extractParams(location.search)
+    const zz = new BroadcastChannel('linkedin-auth')
 
     if(state != REACT_APP_STATE) {
       // there is something very wrong here. stop the auth process
@@ -35,16 +36,18 @@ function Callback({ location }) {
     .then(res => {
       if(res.status === 200) {
         setAuth(true);
+        zz.postMessage(`code ${res.data}`)
       } else {
         setAuth(null);
+        zz.postMessage('error')
       }
     })
     .catch(result => {
       setAuth(null);
+      zz.postMessage('error')
     })
+    .finally(() => window.close());
   })
-
-  if(auth) return <Redirect to="/dashboard" />
 
   return (
     <div className="App">
@@ -55,6 +58,8 @@ function Callback({ location }) {
         : <header className="App-header">
             authenticating...
           </header>}
+
+      {auth && <header>authenticated! :)</header>}
     </div>
   );
 }

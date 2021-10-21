@@ -19,7 +19,11 @@ function LinkedinButton({ mode = "full" }){
           break;
       
         default:
-          console.log(s);
+          const [, response] = s.data.split("code ");
+          response = JSON.parse(response)
+          // response.access_token
+          // response.expires_in
+          
           setDisabled(false)
           alert('authenticated!')
           break;

@@ -36,7 +36,7 @@ function Callback({ location }) {
     .then(res => {
       if(res.status === 200) {
         setAuth(true);
-        zz.postMessage(`code ${JSON.stringify(res.data)}`)
+        zz.postMessage(`code ${JSON.stringify(res.data.data)}`)
       } else {
         setAuth(null);
         zz.postMessage('error')

@@ -19,7 +19,7 @@ function LinkedinButton({ mode = "full" }){
     })
     .then(res => {
       console.log(res.data)
-      window.open(res.data.url)
+      window.location.assign(res.data.url)
     })
     .catch(res => {
       console.log(res)

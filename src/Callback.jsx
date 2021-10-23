@@ -16,7 +16,7 @@ function Callback({ location }) {
   useEffect(() => {
     // get code and state
     // handle errors...
-    // send data to the server..
+    // send data to the server...
     // -- post req.
     // -- content-type: x-www-form-urlencoded
     const { code, state } = extractParams(location.search)
@@ -51,15 +51,15 @@ function Callback({ location }) {
 
   return (
     <div className="App">
-      {auth === null
-        ? <header className="App-header">
-            could not authenticate...
-          </header>
-        : <header className="App-header">
-            authenticating...
-          </header>}
-
-      {auth && <header>authenticated! :)</header>}
+      {auth 
+        ? <header>authenticated! :)</header>
+        : auth === null
+          ? <header className="App-header">
+              could not authenticate...
+            </header>
+          : <header className="App-header">
+              authenticating...
+            </header>}
     </div>
   );
 }
